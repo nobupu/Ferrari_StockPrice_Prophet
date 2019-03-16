@@ -1,5 +1,6 @@
 # Predict stock price of Ferrari(RACE) by Prophet
 # Reference URL : https://qiita.com/japanesebonobo/items/58304c74d6ac67e4f41a
+# Reference URL: https://www.procrasist.com/entry/13-prophet
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,6 +10,8 @@ from fbprophet import Prophet
 
 data = pd.DataFrame()
 file_name = './data/FerrariStock_2018.csv'
+
+# Set the column name for date and stock price as 'ds' and 'y'to use Prophet.
 data2 = pd.read_csv(file_name, skiprows=1,header=None, names=['ds','y'])
 
 data = data.append(data2)
