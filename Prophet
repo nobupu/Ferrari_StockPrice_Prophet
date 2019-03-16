@@ -1,9 +1,11 @@
-# Prophetで株価予測
-# 参考URL : https://qiita.com/japanesebonobo/items/58304c74d6ac67e4f41a
+# Predict stock price of Ferrari(RACE) by Prophet
+# Reference URL : https://qiita.com/japanesebonobo/items/58304c74d6ac67e4f41a
 
 import pandas as pd
 import matplotlib.pyplot as plt
 from fbprophet import Prophet
+
+# Load data which contains stock price in 2018
 
 data = pd.DataFrame()
 file_name = './data/FerrariStock_2018.csv'
@@ -14,10 +16,15 @@ data = data.append(data2)
 model = Prophet()
 model.fit(data)
 
+# The number of "periods" decides the term of prediction. 
 future_data = model.make_future_dataframe(periods=250, freq = 'd')
+
+# Remove the prediction for Saturday and Sunday
 future_data = future_data[future_data['ds'].dt.weekday < 5]
 
+# Stores the result of predction into "forecast_data".
 forecast_data = model.predict(future_data)
 
+# Visualization of the result as graph
 fig = model.plot(forecast_data)
 model.plot_components(forecast_data)
